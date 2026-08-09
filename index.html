@@ -246,8 +246,25 @@
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 #taphint{animation:pulse 2.2s ease-in-out infinite}
 @keyframes pulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+/* pointing hand: presses toward the envelope and releases */
+#platesvg #taphand{transform-box:fill-box;transform-origin:center;animation:tapPress 1.8s ease-in-out infinite}
+@keyframes tapPress{
+  0%,100%{transform:translate(0,0) scale(1)}
+  40%{transform:translate(-14px,-14px) scale(.94)}
+  55%{transform:translate(-14px,-14px) scale(.94)}
+}
+#platesvg #ripple1{transform-box:fill-box;transform-origin:center;animation:rip 1.8s ease-out infinite}
+#platesvg #ripple2{transform-box:fill-box;transform-origin:center;animation:rip 1.8s ease-out infinite .12s}
+@keyframes rip{
+  0%,38%{transform:scale(.2);opacity:0}
+  48%{transform:scale(.6);opacity:1}
+  80%{transform:scale(1.4);opacity:0}
+  100%{transform:scale(1.4);opacity:0}
+}
+#platesvg.open #taphand{display:none}
 @media (prefers-reduced-motion:reduce){
-  #platesvg #envgroup,#taphint,#platesvg #envglow{animation:none}
+  #platesvg #envgroup,#taphint,#platesvg #envglow,#platesvg #taphand,#platesvg #ripple1,#platesvg #ripple2{animation:none}
 }
 #invite{visibility:hidden}
 #invite.show{visibility:visible}
@@ -381,6 +398,25 @@
     <g transform="translate(700,648) rotate(45)">
       <ellipse cx="0" cy="0" rx="11" ry="4" fill="#F2C230" stroke="#C8951A" stroke-width=".9"/>
       <ellipse cx="-3.5" cy="-0.8" rx="2.8" ry="1.2" fill="#FFF3D0" opacity=".85"/>
+    </g>
+  </g>
+
+
+  <!-- tap-here hand cue (interactive only) -->
+  <g id="taphand" opacity=".72">
+    <g transform="translate(560,560) rotate(-18)">
+      <path d="M18 74 C10 62 2 44 6 36 C9 30 16 30 20 36 L30 52 L30 12 C30 4 42 4 42 12 L42 42
+               L42 34 C42 27 53 27 53 34 L53 44
+               L53 38 C53 31 63 31 63 38 L63 48
+               L63 44 C63 38 72 38 72 44 L72 66 C72 84 62 96 46 96 C32 96 24 88 18 74 Z"
+            fill="#FFFDF6" stroke="#46280F" stroke-width="3.5" stroke-linejoin="round"/>
+      <path d="M30 52 L30 62 M42 42 L42 60 M53 44 L53 60 M63 48 L63 62"
+            stroke="#46280F" stroke-width="2" opacity=".35" stroke-linecap="round"/>
+    </g>
+    <!-- tap ripple rings at the fingertip -->
+    <g fill="none" stroke="#B3202C">
+      <circle id="ripple1" cx="577" cy="556" r="14" stroke-width="3"/>
+      <circle id="ripple2" cx="577" cy="556" r="26" stroke-width="2" opacity=".5"/>
     </g>
   </g>
 
